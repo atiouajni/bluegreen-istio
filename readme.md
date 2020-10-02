@@ -32,7 +32,6 @@ Please follow the steps of [Installing Red Hat Service Mesh](https://docs.opensh
 ## I - Installing bluegreen application
 
 Follow [bluegreen application](https://github.com/atiouajni/bluegreen#installation) installation process.
-
   
 ## II - Installing Istio
 
