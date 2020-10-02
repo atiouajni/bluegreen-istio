@@ -1,0 +1,16 @@
+#https://istio.io/latest/docs/reference/config/networking/gateway/
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: bluegreen-gateway
+  namespace: bluegreen
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "HOST_TO_BE_REPLACED" #<< oc -n istio-system get route istio-ingressgateway -o jsonpath='{.spec.host}')

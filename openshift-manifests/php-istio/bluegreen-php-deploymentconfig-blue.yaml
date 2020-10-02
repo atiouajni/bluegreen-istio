@@ -1,0 +1,47 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  generation: 5
+  labels:
+    app: bluegreen
+  name: bluegreen-b
+  namespace: bluegreen
+spec:
+  replicas: 1
+  selector:
+    app: bluegreen
+    deploymentconfig: bluegreen-b
+  strategy:
+    type: Rolling
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: bluegreen
+        deploymentconfig: bluegreen-b
+        version: blue
+    spec:
+      containers:
+      - env:
+        - name: COLOR
+          value: blue
+        image: bluegreen/bluegreen:latest
+        imagePullPolicy: Always
+        name: bluegreen
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 8443
+          protocol: TCP
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - bluegreen
+      from:
+        kind: ImageStreamTag
+        name: bluegreen:latest
+        namespace: bluegreen
+    type: ImageChange
