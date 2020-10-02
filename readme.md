@@ -1,6 +1,6 @@
 # Introduction
 
-This repository will add Istio feature to our basic [bluegreen application](https://github.com/atiouajni/bluegreen).
+This repository will add Istio features to our basic [bluegreen application](https://github.com/atiouajni/bluegreen).
 We will be able to demonstrate some features from Istio like :
 
 - Traffic management
