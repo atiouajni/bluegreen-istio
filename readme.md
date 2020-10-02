@@ -8,11 +8,11 @@ We will be able to demonstrate some features from Istio like :
 - Policies
 - observability
 
-TODO - Add screenshots
-
 # Architecture
 
-TODO - Need to an architecture overview of bluegreen services
+<p align="center">
+<img src="./docs/img/bluegreen-services.png" />
+</p>
 
 # Requirements
 
