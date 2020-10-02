@@ -101,6 +101,7 @@ if you look at the **VirtualService** resource, it describes a load balancing st
 
 ```shell
 #Check the percentage distribution
+#Respy is a tool provided in the basic bluegreen application
 watch -p ./respy --c 10 --n 100 --u http://$GATEWAY_URL/color.php
 ````
 
