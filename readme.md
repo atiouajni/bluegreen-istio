@@ -30,17 +30,18 @@ Please follow the steps of [Installing Red Hat Service Mesh](https://docs.opensh
 - Creating and configuring a Service Mesh Control Plane
 
 ```shell
+# istio-system is used as a namespace
 oc apply -f istio-manifests/ServiceMeshControlPlane.yaml
 ```
 
 
 
 # Installation
-## I - Installing bluegreen application
+## I - Build bluegreen application
 
 Follow [bluegreen application](https://github.com/atiouajni/bluegreen#installation) installation process.
   
-## II - Installing Istio
+## II - Deploy bluegreen application
 
 **1 - Clone the project**
 
@@ -49,9 +50,9 @@ git clone https://github.com/atiouajni/bluegreen-istio
 cd bluegreen-istio
 ```
 
-**2 - Deploy a Blue and Green application**
+**2 - Deploy a Blue and Green applications**
 
-We need to deploy 2 Pods containing sidecar.istio.io/inject=true annotation to enable automatic sidecar injection.
+In this section we will deploy 2 Pods containing sidecar.istio.io/inject=true annotation to enable automatic sidecar injection.
 
 ```shell
 oc apply -f openshift-manifests/php-istio/
