@@ -27,6 +27,13 @@ Please follow the steps of [Installing Red Hat Service Mesh](https://docs.opensh
 - Installing Jaeger Operator
 - Installing Kiali Operator
 - Installing Red Hat OpenShift Service Mesh Operator
+- Creating and configuring a Service Mesh Control Plane
+
+```shell
+oc apply -f istio-manifests/ServiceMeshControlPlane.yaml
+```
+
+
 
 # Installation
 ## I - Installing bluegreen application
@@ -42,13 +49,7 @@ git clone https://github.com/atiouajni/bluegreen-istio
 cd bluegreen-istio
 ```
 
-**2 - Create bluegreen project**
- 
-```shell
-oc new-project bluegreen
-```
-
-**3 - Deploy a Blue and Green application**
+**2 - Deploy a Blue and Green application**
 
 We need to deploy 2 Pods containing sidecar.istio.io/inject=true annotation to enable automatic sidecar injection.
 
@@ -56,14 +57,13 @@ We need to deploy 2 Pods containing sidecar.istio.io/inject=true annotation to e
 oc apply -f openshift-manifests/php-istio/
 ```
 
-**4 - Create ServiceMeshControlPlane and ServiceMeshMemberRoll resources**
-
+**3 - Create ServiceMeshMemberRoll resources**
+This custom resource will tell to Istio controller to monitor bluegren namespace 
 ```shell
-oc apply -f istio-manifests/ServiceMeshControlPlane.yaml
 oc apply -f istio-manifests/ServiceMeshMemberRoll.yaml
 ```
 
-**5- Retrieve the Istio ingress gateway address**
+**4 - Retrieve the Istio ingress gateway address**
 
 ```shell
 export GATEWAY_URL=$(oc -n istio-system get route istio-ingressgateway -o jsonpath='{.spec.host}')
@@ -71,7 +71,7 @@ echo  $GATEWAY_URL
 
 ```
 
-**6 - Create Istio Gateway, VirtualService and DestinationRule**
+**5 - Create Istio Gateway, VirtualService and DestinationRule**
 
 ```shell
 #This command replaces the default host address with your gateway address
@@ -82,7 +82,7 @@ oc apply -f istio-manifests/DestinationRule.yaml
 oc apply -f istio-manifests/VirtualService-LoadBalancing-70-30.yaml
 ```
 
-**7 - Access the bluegreen app from Istio gatway**
+**6 - Access the bluegreen app from Istio gatway**
 
 ```shell
 curl -o /dev/null -s -w "%{http_code}\n" http://$GATEWAY_URL/image.php
