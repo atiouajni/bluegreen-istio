@@ -58,6 +58,7 @@ oc apply -f openshift-manifests/php-istio/
 ```
 
 **3 - Create ServiceMeshMemberRoll resources**
+
 This custom resource will tell to Istio controller to monitor bluegren namespace 
 ```shell
 oc apply -f istio-manifests/ServiceMeshMemberRoll.yaml
