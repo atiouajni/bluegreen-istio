@@ -42,10 +42,10 @@ git clone https://github.com/atiouajni/bluegreen-istio
 cd bluegreen-istio
 ```
 
-**2 - Create istio project**
+**2 - Create bluegreen project**
  
 ```shell
-oc new-project istio-system
+oc new-project bluegreen
 ```
 
 **3 - Deploy a Blue and Green application**
